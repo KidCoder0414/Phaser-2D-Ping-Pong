@@ -34,6 +34,8 @@
                 game.load.image('paddle', 'assets/paddle.png');
                 game.load.image('ball', 'assets/ball.png');
                 game.load.bitmapFont('font', 'assets/font.png', 'assets/font.xml');
+                game.load.audio('hit_1', ['assets/hit_1.ogg', 'assets/hit_1.wav']);
+                game.load.audio('hit_2', ['assets/hit_2.ogg', 'assets/hit_2.wav']);
             }
 
             function create() {
@@ -70,8 +72,12 @@
 
                 controlPaddle(paddle1, game.input.y); //Mouse position of y.
 
-                game.physics.arcade.collide(paddle1, ball);
-                game.physics.arcade.collide(paddle2, ball);
+                game.physics.arcade.collide(paddle1, ball, function() {
+                    game.sound.play('hit_1');
+                });
+                game.physics.arcade.collide(paddle2, ball, function() {
+                    game.sound.play('hit_2');
+                });
 
                 if (ball.body.blocked.left) {
                     score2++;

@@ -81,9 +81,11 @@
 
                 if (ball.body.blocked.left) {
                     score2++;
+                    newRaund();
                 }
                 if (ball.body.blocked.right) {
                     score1++;
+                    newRaund();
                 }
 
                 paddle2.body.velocity.setTo(ball.body.velocity.y);
@@ -133,6 +135,19 @@
                     ball.body.velocity.y = ballVelocity;
                     ballLaunched = true;
                 }
+            }
+
+            function newRaund() {
+                resetPaddlePositions();
+                launchBall();
+            }
+
+            function resetPaddlePositions() {
+                paddle1.x = 0;
+                paddle1.y = game.world.centerY;
+
+                paddle2.x = game.world.width - 8;
+                paddle2.y = game.world.centerY;
             }
         </script>
     </body>

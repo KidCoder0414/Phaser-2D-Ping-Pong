@@ -30,6 +30,7 @@
             function preload() {
                 game.load.image('paddle', 'assets/paddle.png');
                 game.load.image('ball', 'assets/ball.png');
+                game.load.bitmapFont('font', 'assets/font.png', 'assets/font.xml');
             }
 
             function create() {
@@ -42,16 +43,19 @@
 
                 game.input.onDown.add(launchBall, this); //Add an event.
 
-                textScore1 = game.add.text(128, 128, '0', {
-                    font: "64px Gabriella",
-                    fill: "#ffffff",
-                    align: "center"
-                });
-                textScore2 = game.add.text(game.world.width - 128, 128,'0', {
-                    font: "64px Gabriella",
-                    fill: "#ffffff",
-                    align: "center"
-                });
+                // textScore1 = game.add.text(128, 128, '0', {
+                //     font: "64px Gabriella",
+                //     fill: "#ffffff",
+                //     align: "center"
+                // });
+                // textScore2 = game.add.text(game.world.width - 128, 128,'0', {
+                //     font: "64px Gabriella",
+                //     fill: "#ffffff",
+                //     align: "center"
+                // });
+
+                textScore1 = game.add.bitmapText(128, 128, 'font', '0', 64);
+                textScore2 = game.add.bitmapText(game.world.width - 128, 128, 'font', '0', 64);
             }
 
             function update() {

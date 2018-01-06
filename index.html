@@ -27,6 +27,9 @@
             var textScore1;
             var textScore2;
 
+            var score1;
+            var score2;
+
             function preload() {
                 game.load.image('paddle', 'assets/paddle.png');
                 game.load.image('ball', 'assets/ball.png');
@@ -56,19 +59,25 @@
 
                 textScore1 = game.add.bitmapText(128, 128, 'font', '0', 64);
                 textScore2 = game.add.bitmapText(game.world.width - 128, 128, 'font', '0', 64);
+
+                score1 = 0;
+                score2 = 0;
             }
 
             function update() {
+                textScore1.text = score1;
+                textScore2.text = score2;
+
                 controlPaddle(paddle1, game.input.y); //Mouse position of y.
 
                 game.physics.arcade.collide(paddle1, ball);
                 game.physics.arcade.collide(paddle2, ball);
 
                 if (ball.body.blocked.left) {
-                    console.log("Player 2 Scores!");
+                    score2++;
                 }
                 if (ball.body.blocked.right) {
-                    console.log("Player 1 Scores!");
+                    score1++;
                 }
 
                 paddle2.body.velocity.setTo(ball.body.velocity.y);

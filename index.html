@@ -20,13 +20,24 @@
             var paddle1;
             var paddle2;
 
+            var ball;
+            var ballLaunched;
+            var ballVelocity;
+
             function preload() {
                 game.load.image('paddle', 'assets/paddle.png');
+                game.load.image('ball', 'assets/ball.png');
             }
 
             function create() {
+                ballLaunched = false;
+                ballVelocity = 400;
+
+                ball = createBall(game.world.centerX, game.world.centerY);
                 paddle1 = createPaddle(0, game.world.centerY);
                 paddle2 = createPaddle(game.world.width - 16, game.world.centerY);
+
+                game.input.onDown.add(launchBall, this); //Add an event.
             }
 
             function update() {
@@ -49,6 +60,29 @@
                     paddle.y = paddle.height/2;
                 } else if (paddle.y > game.world.height - paddle.height / 2) {
                     paddle.y = game.world.height - paddle.height / 2;
+                }
+            }
+
+            function createBall(x, y) {
+                var ball = game.add.sprite(x, y, "ball");
+                ball.anchor.setTo(0.5, 0.5);
+                game.physics.arcade.enable(ball);
+                ball.body.collideWorldBounds = true;
+                ball.body.bounce.setTo(1, 1);
+
+                return ball;
+            }
+
+            function launchBall() {
+                if(ballLaunched) {
+                    ball.x = game.world.centerX;
+                    ball.y = game.world.centerY;
+                    ball.body.velocity.setTo(0, 0);
+                    ballLaunched = false;
+                } else {
+                    ball.body.velocity.x = -ballVelocity;
+                    ball.body.velocity.y = ballVelocity;
+                    ballLaunched = true;
                 }
             }
         </script>

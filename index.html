@@ -24,6 +24,9 @@
             var ballLaunched;
             var ballVelocity;
 
+            var textScore1;
+            var textScore2;
+
             function preload() {
                 game.load.image('paddle', 'assets/paddle.png');
                 game.load.image('ball', 'assets/ball.png');
@@ -38,6 +41,17 @@
                 paddle2 = createPaddle(game.world.width - 8, game.world.centerY);
 
                 game.input.onDown.add(launchBall, this); //Add an event.
+
+                textScore1 = game.add.text(128, 128, '0', {
+                    font: "64px Gabriella",
+                    fill: "#ffffff",
+                    align: "center"
+                });
+                textScore2 = game.add.text(game.world.width - 128, 128,'0', {
+                    font: "64px Gabriella",
+                    fill: "#ffffff",
+                    align: "center"
+                });
             }
 
             function update() {

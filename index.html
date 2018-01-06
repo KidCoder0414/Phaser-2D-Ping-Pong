@@ -42,6 +42,16 @@
 
             function update() {
                 controlPaddle(paddle1, game.input.y); //Mouse position of y.
+
+                game.physics.arcade.collide(paddle1, ball);
+                game.physics.arcade.collide(paddle2, ball);
+
+                if (ball.body.blocked.left) {
+                    console.log("Player 2 Scores!");
+                }
+                if (ball.body.blocked.right) {
+                    console.log("Player 1 Scores!");
+                }
             }
 
             function createPaddle(x, y) {
@@ -49,6 +59,7 @@
                 paddle.anchor.setTo(0.5, 0.5);
                 game.physics.arcade.enable(paddle); //Enables the body.
                 paddle.body.collideWorldBounds = true;
+                paddle.body.immovable = true; //Static.
 
                 return paddle;
             }
